@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import sys
-import time
-from icp10125 import ICP10125, LOW_NOISE, ULTRA_LOW_NOISE
+from icp10125 import ICP10125, ULTRA_LOW_NOISE
 
 
 BAR_CHAR = u'\u2588'
@@ -26,7 +25,7 @@ min_temperature = 1 << 32
 max_temperature = 0
 
 device = ICP10125()
-    
+
 try:
     while True:
         pressure, temperature = device.measure(ULTRA_LOW_NOISE)
@@ -51,7 +50,7 @@ try:
 
         t_bar = t_colour + t_bar + ANSI_COLOR_RESET
         p_bar = p_colour + p_bar + ANSI_COLOR_RESET
-        
+
         t_reading = "{:.4f}c".format(temperature).ljust(BAR_WIDTH + 14)
         p_reading = "{:.4f}hPa".format(pressure).ljust(BAR_WIDTH + 14)
 
@@ -60,20 +59,18 @@ try:
 {blank}
 Temperature:  {t_bar}
 {t_reading}
-Pressure:     {p_bar}                                 
+Pressure:     {p_bar}
 {p_reading}
 {blank}
 """.format(
-    title="ICP10125 Sensor".ljust(BAR_WIDTH + 14, " "),
-    t_bar=t_bar,
-    p_bar=p_bar,
-    t_reading=t_reading,
-    p_reading=p_reading,
-    blank=" " * (BAR_WIDTH + 14)
-))
+            title="ICP10125 Sensor".ljust(BAR_WIDTH + 14, " "),
+            t_bar=t_bar,
+            p_bar=p_bar,
+            t_reading=t_reading,
+            p_reading=p_reading,
+            blank=" " * (BAR_WIDTH + 14)
+        ))
         sys.stdout.flush()
 
 except KeyboardInterrupt:
     pass
-
-

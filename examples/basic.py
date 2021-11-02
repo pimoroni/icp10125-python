@@ -4,7 +4,7 @@ from icp10125 import ICP10125
 
 
 device = ICP10125()
-    
+
 try:
     while True:
         pressure, temperature = device.measure()
@@ -13,5 +13,3 @@ Temperature: {temperature:.4f}c""")
         time.sleep(1.0)
 except KeyboardInterrupt:
     pass
-
-
