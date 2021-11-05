@@ -110,6 +110,9 @@ class ICP10125:
 
         return self.pressure, self.temperature
 
+    def calculate_altitude(self, pressure, qnh=1013.25):
+        return 44330.0 * (1.0 - pow(pressure / qnh, 1.0 / 5.255))
+
     def process_data(self, p_LSB, T_LSB):
         LUT_lower = 3.5 * (1 << 20)
         LUT_upper = 11.5 * (1 << 20)
