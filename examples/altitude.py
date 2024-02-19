@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import time
+
 from icp10125 import ICP10125
 
 """QNH for calculating altitude.

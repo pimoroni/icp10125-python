@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import time
-from icp10125 import ICP10125
 
+from icp10125 import ICP10125
 
 device = ICP10125()
 
