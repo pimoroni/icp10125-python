@@ -54,7 +54,7 @@ class ICP10125:
         self.read_otp()
 
     def rdwr(self, command, length=0, delay=0):
-        if type(command) is int:
+        if isinstance(command, int):
             msg_w = i2c_msg.write(self.address, struct.pack(">H", command))
         else:
             msg_w = i2c_msg.write(self.address, command)
