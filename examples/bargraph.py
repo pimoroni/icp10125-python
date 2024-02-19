@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+
 from icp10125 import ICP10125, ULTRA_LOW_NOISE
 
 """QNH for calculating altitude.

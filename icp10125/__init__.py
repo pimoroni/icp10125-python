@@ -1,5 +1,6 @@
-import time
 import struct
+import time
+
 from smbus2 import SMBus, i2c_msg
 
 __version__ = '0.0.1'
