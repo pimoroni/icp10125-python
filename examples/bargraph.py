@@ -12,15 +12,15 @@ Edit this value or run with ./bargraph <your QNH>
 """
 QNH = 1013.25
 
-BAR_CHAR = u'\u2588'
+BAR_CHAR = "\u2588"
 
-ANSI_COLOR_RED = '\x1b[31m'
-ANSI_COLOR_GREEN = '\x1b[32m'
-ANSI_COLOR_YELLOW = '\x1b[33m'
-ANSI_COLOR_BLUE = '\x1b[34m'
-ANSI_COLOR_MAGENTA = '\x1b[35m'
-ANSI_COLOR_BLACK = '\x1b[30m'
-ANSI_COLOR_RESET = '\x1b[0m'
+ANSI_COLOR_RED = "\x1b[31m"
+ANSI_COLOR_GREEN = "\x1b[32m"
+ANSI_COLOR_YELLOW = "\x1b[33m"
+ANSI_COLOR_BLUE = "\x1b[34m"
+ANSI_COLOR_MAGENTA = "\x1b[35m"
+ANSI_COLOR_BLACK = "\x1b[30m"
+ANSI_COLOR_RESET = "\x1b[0m"
 
 
 colours = [ANSI_COLOR_BLUE, ANSI_COLOR_GREEN, ANSI_COLOR_YELLOW, ANSI_COLOR_RED, ANSI_COLOR_MAGENTA]
@@ -83,12 +83,15 @@ try:
         p_bar = p_colour + p_bar + ANSI_COLOR_RESET
         a_bar = a_colour + a_bar + ANSI_COLOR_RESET
 
-        t_reading = "{:.4f}c".format(temperature).ljust(BAR_WIDTH + 14)
-        p_reading = "{:.4f}hPa".format(pressure / 100).ljust(BAR_WIDTH + 14)
-        a_reading = "{:.2f}m".format(altitude).ljust(BAR_WIDTH + 14)
+        t_reading = f"{temperature:.4f}c".ljust(BAR_WIDTH + 14)
+        p_reading = f"{pressure / 100:.4f}hPa".ljust(BAR_WIDTH + 14)
+        a_reading = f"{altitude:.2f}m".ljust(BAR_WIDTH + 14)
 
-        sys.stdout.write('\x1b[0;1H')
-        sys.stdout.write(u"""{title}
+        title = "ICP10125 Sensor".ljust(BAR_WIDTH + 14, " ")
+        blank = " " * (BAR_WIDTH + 14)
+
+        sys.stdout.write("\x1b[0;1H")
+        sys.stdout.write(f"""{title}
 {blank}
 Temperature:  {t_bar}
 {t_reading}
@@ -97,16 +100,7 @@ Pressure:     {p_bar}
 Altitude:     {a_bar}
 {a_reading}
 {blank}
-""".format(
-            title="ICP10125 Sensor".ljust(BAR_WIDTH + 14, " "),
-            t_bar=t_bar,
-            p_bar=p_bar,
-            a_bar=a_bar,
-            t_reading=t_reading,
-            p_reading=p_reading,
-            a_reading=a_reading,
-            blank=" " * (BAR_WIDTH + 14)
-        ))
+""")
         sys.stdout.flush()
 
 except KeyboardInterrupt:

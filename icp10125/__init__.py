@@ -3,7 +3,7 @@ import time
 
 from smbus2 import SMBus, i2c_msg
 
-__version__ = '0.0.1'
+__version__ = "0.0.1"
 
 NORMAL = 0x6825
 LOW_POWER = 0x609C
@@ -49,7 +49,7 @@ class ICP10125:
 
         chip_id = self.chip_id()
         if chip_id != CHIP_ID:
-            raise RuntimeError("ICP10125: Invalid Chip ID {:02x}, expected: {:02x}".format(chip_id, CHIP_ID))
+            raise RuntimeError(f"ICP10125: Invalid Chip ID {chip_id:02x}, expected: {CHIP_ID:02x}")
 
         self.read_otp()
 
@@ -72,7 +72,7 @@ class ICP10125:
                 result = list(msg_r)
                 data = []
                 for chunk in range(0, len(result), 3):
-                    if self.crc8(result[chunk:chunk + 2]) != result[chunk + 2]:
+                    if self.crc8(result[chunk : chunk + 2]) != result[chunk + 2]:
                         raise ValueError("ICP10125: Invalid CRC8 in response.")
                     data.append((result[chunk] << 8) | result[chunk + 1])
                 if len(data) == 1:
@@ -84,12 +84,12 @@ class ICP10125:
 
     def chip_id(self):
         result = self.rdwr(READ_ID, 3)
-        return result & 0x3f
+        return result & 0x3F
 
     def read_otp(self):
         move_address_ptr = [
             MOVE_ADDRESS_PTR >> 8, MOVE_ADDRESS_PTR & 0xff,
-            0x00, 0x66, 0x9c  # Address CRC8
+            0x00, 0x66, 0x9C  # Address CRC8
         ]
         self.rdwr(move_address_ptr)
 
@@ -144,7 +144,7 @@ class ICP10125:
         return A, B, C
 
     def crc8(self, data, polynomial=0x31):
-        result = 0xff
+        result = 0xFF
         for byte in data:
             result ^= byte
             for bit in range(8):
@@ -153,4 +153,4 @@ class ICP10125:
                     result ^= polynomial
                 else:
                     result <<= 1
-        return result & 0xff
+        return result & 0xFF
