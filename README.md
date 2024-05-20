@@ -5,25 +5,31 @@
 [![PyPi Package](https://img.shields.io/pypi/v/icp10125.svg)](https://pypi.python.org/pypi/icp10125)
 [![Python Versions](https://img.shields.io/pypi/pyversions/icp10125.svg)](https://pypi.python.org/pypi/icp10125)
 
-# Pre-requisites
-
-You must enable:
-
-* i2c: `sudo raspi-config nonint do_i2c 0`
-
-You can optionally run `sudo raspi-config` or the graphical Raspberry Pi Configuration UI to enable interfaces.
 
 # Installing
 
-Stable library from PyPi:
+If you've already set up a Python virtual environment, you can also install the stable library manually from PyPi:
 
-* Just run `python3 -m pip install icp10125`
+```
+pip install icp10125
+```
 
-In some cases you may need to use `sudo` or install pip with: `sudo apt install python3-pip`
+Otherwise our install script will set one up for you.
+
+Stable library from GitHub:
+
+```
+git clone https://github.com/pimoroni/icp10125-python
+cd icp10125-python
+./install.sh
+```
 
 Latest/development library from GitHub:
 
-* `git clone https://github.com/pimoroni/icp10125-python`
-* `cd icp10125-python`
-* `./install.sh --unstable`
+```
+git clone https://github.com/pimoroni/icp10125-python
+cd icp10125-python
+./install.sh --unstable
+```
 
+**Note** Libraries will be installed in the "pimoroni" virtual environment, you will need to activate it to run examples:
